@@ -5,8 +5,9 @@ Lab 1: Llamas
 
 Author: Galvez, Jayson S.
 
-Notes: compile using 'make'
-
+Notes:
+    compile using 'make'
+    submit using 'check50 cs50/labs/2023/x/population'
  **************/
 
 #include <cs50.h>
