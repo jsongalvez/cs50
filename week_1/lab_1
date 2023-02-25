@@ -41,13 +41,17 @@ int main(void)
     printf("Years: %i\n", years);
 }
 
+// returns number of years to reach end population
 int calculate(long n, long end)
 {
     int i = 0;
-    for (; n <= end; i++)
+    while (n < end)
     {
         n = n + born(n) - die(n);
+        i++;
     }
+
+
     return i;
 }
 
