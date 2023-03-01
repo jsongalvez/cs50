@@ -4,6 +4,9 @@ cs50x
 Galvez, Jayson S.
 credit.c
 
+Special thanks: Donmai (reviewed my code and gave helpful advice)
+Disclaimer: I recieved no help in my initial submission of credit.c, which recieved full marks.
+
 References:
 - https://stackoverflow.com/questions/3068397/finding-the-length-of-an-integer-in-c#:~:text=Yes%2C%20using%20sprintf
 - https://www.log2base2.com/c-examples/loop/split-a-number-into-digits-in-c.html
