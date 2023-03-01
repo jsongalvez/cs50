@@ -4,7 +4,7 @@ cs50x
 Galvez, Jayson S.
 credit.c
 
-Special thanks: Donmai (reviewed my code and gave helpful advice)
+Special thanks: donmai-me (reviewed my code and gave helpful advice)
 Disclaimer: I recieved no help in my initial submission of credit.c, which recieved full marks.
 
 References:
