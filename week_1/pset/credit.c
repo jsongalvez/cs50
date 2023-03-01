@@ -12,10 +12,8 @@ References:
 - https://www.log2base2.com/c-examples/loop/split-a-number-into-digits-in-c.html
 ****************************/
 
-#include <cs50.h>
-#include <stdio.h>
-#include <math.h>
-#include <stdlib.h>
+#include <cs50.h> // get_long, bool
+#include <stdio.h> // snprintf
 
 #define max_len 16 // for setting array to 16 digits
 #define mii_len 2 // Major Industry Identifier (MII)
