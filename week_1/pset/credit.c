@@ -1,8 +1,19 @@
+/****************************
+cs50x
+3/1/23
+Galvez, Jayson S.
+credit.c
+
+References:
+- https://stackoverflow.com/questions/3068397/finding-the-length-of-an-integer-in-c#:~:text=Yes%2C%20using%20sprintf
+- https://www.log2base2.com/c-examples/loop/split-a-number-into-digits-in-c.html
+****************************/
+
 #include <cs50.h>
 #include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
 
-#define min_digits 1000000000000 // 13 digits, floor
-#define max_digits 9999999999999999 // 16 digits, ceiling
 #define max_len 16 // for setting array to 16 digits
 #define mii_len 2 // Major Industry Identifier (MII)
 
@@ -32,27 +43,7 @@ int main(void)
 void print_card_type(long id)
 {
     // check id length
-    int len = 0;
-    // if 13 digits
-    if (id < 10000000000000)
-    {
-        len = 13;
-    }
-    // if 14 digits
-    else if (id < 100000000000000)
-    {
-        len = 14;
-    }
-    // if 15 digits
-    else if (id < 1000000000000000)
-    {
-        len = 15;
-    }
-    // if 16 digits (default)
-    else
-    {
-        len = 16;
-    }
+    int len = snprintf(NULL, 0, "%ld", id);
 
     // convert to array
     int id_arr[max_len];
@@ -92,6 +83,14 @@ void split_to_array(long num, int arr[])
 // INVALID = 1 AMEX = 2 VISA = 3 MASTERCARD = 4
 int card_type(int id[], int len)
 {
+    // calculate luhn's algorithm if valid number
+    bool valid = luhn(id, len);
+    if (!valid || len < 13 || len > 16) // if not valid number, then
+    {
+        return INVALID;
+    }
+
+    // check if first two digits are valid payment networks
     // mii[2]
     int mii[mii_len];
 
@@ -102,13 +101,6 @@ int card_type(int id[], int len)
     {
         mii[j] = id[i];
         j++;
-    }
-
-    // calculate luhn's algorithm if valid number
-    bool valid = luhn(id, len);
-    if (!valid) // if not valid number, then
-    {
-        return INVALID;
     }
 
     // check if AMEX: 34, 37
@@ -141,7 +133,6 @@ int card_type(int id[], int len)
 
     // default return value
     return INVALID;
-
 }
 
 // luhn's algorithm
@@ -173,17 +164,7 @@ bool luhn(int id[], int len)
     {
         sum += id[i];
     }
-    // if sum % 10 is 0, card is valid
-    if (sum % 10 == 0)
-    {
-        return true;
-    }
-    // else, not a valid card
-    else
-    {
-        return false;
-    }
 
-    // default return value
-    return -1;
+    // if sum % 10 is 0, card is valid
+    return sum % 10 == 0;
 }
