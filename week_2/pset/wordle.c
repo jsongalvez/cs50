@@ -1,3 +1,10 @@
+/**
+ * cs50x
+ * March 6, 2023 - March 9, 2023
+ * Galvez, Jayson S.
+ * wordle.c
+*/
+
 #include <cs50.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -32,12 +39,18 @@ int main(int argc, string argv[])
         printf("Usage: %s word\n", argv[0]);
         return 1;
     }
-    
+
     int wordsize = 0;
 
     // ensure argv[1] is either 5, 6, 7, or 8 and store that value in wordsize instead
     // TODO #2
 
+    wordsize = strlen(argv[1]);
+    if (wordsize < 5 || wordsize > 8)
+    {
+        printf("5 to 8 letter words only\n");
+        return 1;
+    }
     // open correct file, each file has exactly LISTSIZE words
     char wl_filename[6];
     sprintf(wl_filename, "%i.txt", wordsize);
@@ -79,6 +92,10 @@ int main(int argc, string argv[])
 
         // set all elements of status array initially to 0, aka WRONG
         // TODO #4
+        for (int j = 0; j < wordsize; j++)
+        {
+            status[j] = WRONG;
+        }
 
         // Calculate score for the guess
         int score = check_word(guess, wordsize, status, choice);
@@ -98,6 +115,14 @@ int main(int argc, string argv[])
 
     // Print the game's result
     // TODO #7
+    if (won)
+    {
+        printf("You won!\n");
+    }
+    else
+    {
+        printf("The word was %s\n", choice);
+    }
 
     // that's all folks!
     return 0;
@@ -110,6 +135,12 @@ string get_guess(int wordsize)
     // ensure users actually provide a guess that is the correct length
     // TODO #3
 
+    do
+    {
+        guess = get_string("Input a 5-letter word: ");
+    }
+    while (strlen(guess) != wordsize);
+
     return guess;
 }
 
@@ -119,6 +150,28 @@ int check_word(string guess, int wordsize, int status[], string choice)
 
     // compare guess to choice and score points as appropriate, storing points in status
     // TODO #5
+    for (int i = 0; i < wordsize; i++)
+    {
+        // if exact match
+        if (guess[i] == choice[i])
+        {
+            status[i] = EXACT;
+            continue;
+        }
+        // if letter (guess) is in word (choice)
+        for (int j = 0; j < wordsize; j++)
+        {
+            if (guess[i] == choice[j])
+            {
+                status[i] = CLOSE;
+            }
+        }
+    }
+    // need to be accumulated separately due to 'continue'
+    for (int i = 0; i < wordsize; i++)
+    {
+        score += status[i];
+    }
 
     // HINTS
     // iterate over each letter of the guess
@@ -135,7 +188,25 @@ void print_word(string guess, int wordsize, int status[])
 {
     // print word character-for-character with correct color coding, then reset terminal font to normal
     // TODO #6
-
+    for (int i = 0; i < wordsize; i++)
+    {
+        switch (status[i])
+        {
+            case WRONG:
+                printf(RED);
+                break;
+            case CLOSE:
+                printf(YELLOW);
+                break;
+            case EXACT:
+                printf(GREEN);
+                break;
+            default:
+                printf("Something went wrong on status[%i].\n", i);
+        }
+        printf("%c", guess[i]);
+        printf(RESET);
+    }
     printf("\n");
     return;
 }
