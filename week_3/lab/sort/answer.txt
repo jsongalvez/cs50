@@ -1,0 +1,11 @@
+sort1 uses: Bubble sort
+
+How do you know?: fast on sorted50k, slow on random50k & reversed 50k
+
+sort2 uses: Merge sort
+
+How do you know?: consistently the fastest on all 50k variations
+
+sort3 uses: Selection sort
+
+How do you know?: slow on sorted50k, fast on random50k & reversed 50k
