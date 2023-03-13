@@ -31,6 +31,11 @@ int convert(string input)
 {
     // get length of string
     int len = strlen(input);
+    // base case
+    if (len <= 0)
+    {
+        return 0;
+    }
     // make a copy
     string input_copy = input;
     // ascii 0-9 is 48 to 57
