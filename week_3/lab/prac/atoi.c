@@ -25,27 +25,24 @@ int main(void)
     printf("%i\n", convert(input));
 }
 
+// Pops the last character recursively from right to left
+// Popped character is converted to integer
 int convert(string input)
 {
-    // TODO
-    // ascii 0-9 is 48-57
+    // get length of string
     int len = strlen(input);
-    if (len <= 0)
-    {
-        return 0;
-    }
-
-    // debugging
-    printf("len: %i\n", len);
-
-    // print current character
-    string new_input = input;
-    int number = (int) new_input[len - 1] - ASCII_0;
+    // make a copy
+    string input_copy = input;
+    // ascii 0-9 is 48 to 57
+    // subtract ascii character by 48 to get integer equivalent
+    int popped_number = (int) input_copy[len - 1] - ASCII_0;
     // delete last character
-    new_input[len - 1] = '\0';
+    input_copy[len - 1] = '\0';
 
     // recursive
-    int new_number = convert(new_input);
+    int new_popped_number = convert(input_copy);
 
-    return 10 * new_number + number;
+    // add popped number by moving the tens place
+    // of new popped number
+    return 10 * new_popped_number + popped_number;
 }
