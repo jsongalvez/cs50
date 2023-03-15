@@ -1,3 +1,13 @@
+/**
+ * cs50x
+ * March 13, 2023 - March XX, 2023
+ * Galvez, Jayson S.
+ * temps.c
+ *
+ * Task is to create the sort_cities function
+ * I chose to implement this using merge sort
+*/
+
 // Practice working with structs
 // Practice applying sorting algorithms
 
@@ -148,9 +158,9 @@ void merge_sort(avg_temp arr[], int start, int end)
     // recursive right half
     merge_sort(arr_right, start_right, end_right);
 
-    printf("merging\n");
+    printf("before merging\n");
 
-    // merge
+    // before merge
     printf("sort_left:\t|");
     for (int i = 0; i < arr_len_left; i++)
     {
@@ -197,4 +207,17 @@ void merge_sort(avg_temp arr[], int start, int end)
             i_r++;
         }
     }
+
+
+    /***************************/
+
+    printf("after merging\n");
+
+    // before merge
+    printf("l_r_merge:\t|");
+    for (int i = 0; i < arr_len; i++)
+    {
+        printf("%i ", arr[i].temp);
+    }
+    printf("\n");
 }
